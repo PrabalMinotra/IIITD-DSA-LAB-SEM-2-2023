@@ -10,7 +10,7 @@
 
 // Constraints
 
-// 1≤𝑚,𝑛≤100
+// 1≤𝑚,𝑛≤2500
 // Input
 // The first line of input consists of two integers 𝑚
 //  and 𝑛
@@ -32,70 +32,94 @@
 
 
 
+#include<stdio.h>
+// void matrixPrinter(int array[], int size) {
+//   for (int i = 0; i < size; ++i) {
+// for (int i = 0; i < size; ++i){
+//     printf("%d ", array[i][j]);
+//}
+//   }
+//   printf("\n");
+// }
 
-
-
-
-#include <stdio.h>
-//slowly expanding the area of checking for dots and removing Xs
-//couting sides and subtracting 1
-//print guests
-void arrayprinter(int array[], int size) {
-  for (int i = 0; i < size; ++i) {
-    if (array[i] != 0){
-    printf("%d ", array[i]);
-  }
-  }
-  printf("\n");
+int birthday(int a, int b, int matrix[][b]){
+int h[b];
+int l[b];
+int r[b];
+int invites = 0;
+for (int i = 0; i < b; i++)
+{
+h[i] = 0;
+l[i] = 0;
+r[i] = b-1;
+}
+for (int i = 0; i < a; i++)
+{
+int left = 0, right = b-1;
+{
+for (int j = 0; j < b; j++)
+{
+if (matrix[i][j] == 0)
+{
+h[j]++;
+if (left > l[j]) l[j] = left;
+}
+else
+{
+h[j] = 0;
+l[j] = 0;
+left = j + 1;
+}
+if (matrix[i][b-1-j] == 0)
+{
+if (right < r[b-1-j])
+{
+    r[b-1-j] = right;
+}
+}
+else
+{
+r[b-1-j] = b-1;
+right = b-j-2;
+}
+}
+for (int j = 0; j < b; j++)
+{
+if (matrix[i][j] == 0)
+{
+int friends = (h[j]+(r[j]-l[j]+1))*2-1;
+if (friends > invites) invites = friends;
+}
+}
+}
+}
+return invites;
 }
 
 int main(){
-int a,b;
-scanf("%d %d",&a,&b);
-int hall[a][b];
+int n, m;
+scanf("%d %d",&n,&m);
+int hall[n][m];
+for (int i = 0; i < n; i++)
+{
+char frens[m+1];
 
-for(int i=0;i<a;i++)
+scanf("%s",frens);
+
+for (int j = 0; j < m; j++)
 {
-char chairs[b+1];
-scanf("%s",chairs);
-for(int j=0;j<b;j++)
-{
-if(chairs[j]=='.') hall[i][j]=0;
-else hall[i][j]=1;
-}
-}
-//arrayprinter(chairs,b+1);
-int freess=0;
-for(int i=0;i<a;i++)
-{
-for(int j=0;j<b;j++)
-{
-if(hall[i][j]==0)
-{
-int c=0;
-int perime=b-j;
-while(hall[i+c][j]==0 && i+c<a)
-{
-for(int d=0;d<=perime;d++)
-{
-if(hall[i+c][j+d]!=0)
-{
-perime=d;
-break;
-}
-}
-c++;
-int friends=2*(c + perime)-1;
-if(freess < friends){
-freess=friends;
+if(frens[j] == '.') {
+
+hall[i][j] = 0;}
+
+else{
+
+hall[i][j] = 1;}
 }
 
 }
 
-}
-
-}
-}
-printf("%d\n",freess);
+printf("%d\n",birthday(n, m, hall));
+//matrixPrinter
 return 0;
 }
