@@ -2,4 +2,7 @@
 
 - 6 Routine labs difficulty level : moderate 
 - 3 surprise labs difficulty level : low / conceptual 
+
+## Questions yet to be answered 
+
 - 
